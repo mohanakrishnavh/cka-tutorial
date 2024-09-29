@@ -1,0 +1,94 @@
+PS C:\Repos\cka-tutorial\01_dockerize_project\getting-started-app> docker build -t todo-app .
+[+] Building 38.3s (10/10) FINISHED                                                                                                         docker:desktop-linux
+ => [internal] load build definition from Dockerfile                                                                                                        0.1s
+ => => transferring dockerfile: 397B                                                                                                                        0.0s 
+ => [internal] load metadata for docker.io/library/node:18-alpine                                                                                           1.6s 
+ => [auth] library/node:pull token for registry-1.docker.io                                                                                                 0.0s
+ => [internal] load .dockerignore                                                                                                                           0.0s
+ => => transferring context: 2B                                                                                                                             0.0s 
+ => [1/4] FROM docker.io/library/node:18-alpine@sha256:02376a266c84acbf45bd19440e08e48b1c8b98037417334046029ab585de03e2                                     9.0s 
+ => => resolve docker.io/library/node:18-alpine@sha256:02376a266c84acbf45bd19440e08e48b1c8b98037417334046029ab585de03e2                                     0.0s 
+ => => sha256:21f39b9ddd19acb73b7cbee0e5755029042719f744f2ce91a26f7e9425a79d6c 447B / 447B                                                                  0.2s 
+ => => sha256:02376a266c84acbf45bd19440e08e48b1c8b98037417334046029ab585de03e2 7.67kB / 7.67kB                                                              0.0s 
+ => => sha256:ea8e360a721d870337fe899c70ea7def62f2a72cf1b6f7beb8a3ccaac8b6049c 1.72kB / 1.72kB                                                              0.0s 
+ => => sha256:f48cc58268524517dc484f884b142fad1411e8b9ed35341342d877d5ae9396e2 6.36kB / 6.36kB                                                              0.0s 
+ => => sha256:3696426c5aa28a9e9d46b6194f46c030c7dce77770db1f30e95e2317a1f97c0a 39.84MB / 39.84MB                                                            4.3s 
+ => => sha256:cdccf44a82db2a9559b2c200f8cdbdb0df43925679f8ddc7c7e925d469b56d1d 1.38MB / 1.38MB                                                              0.7s
+ => => extracting sha256:3696426c5aa28a9e9d46b6194f46c030c7dce77770db1f30e95e2317a1f97c0a                                                                   4.0s 
+ => => extracting sha256:cdccf44a82db2a9559b2c200f8cdbdb0df43925679f8ddc7c7e925d469b56d1d                                                                   0.1s 
+ => => extracting sha256:21f39b9ddd19acb73b7cbee0e5755029042719f744f2ce91a26f7e9425a79d6c                                                                   0.0s
+ => => extracting sha256:cdccf44a82db2a9559b2c200f8cdbdb0df43925679f8ddc7c7e925d469b56d1d                                                                   0.1s 
+ => => extracting sha256:21f39b9ddd19acb73b7cbee0e5755029042719f744f2ce91a26f7e9425a79d6c                                                                   0.0s 
+ => [internal] load build context                                                                                                                           0.7s 
+ => => transferring context: 6.42MB                                                                                                                         0.6s 
+ => [internal] load build context                                                                                                                           0.7s 
+ => => transferring context: 6.42MB                                                                                                                         0.6s 
+ => [2/4] WORKDIR /app                                                                                                                                      1.0s 
+ => [3/4] COPY . .                                                                                                                                          0.1s 
+ => [4/4] RUN yarn install --production                                                                                                                    24.2s 
+ => exporting to image                                                                                                                                      2.1s 
+ => => exporting layers                                                                                                                                     2.1s 
+ => => writing image sha256:b63820c22103134af54b0d1627bdcf49ee77d3aeff0b957165c5a659b6e89faf                                                                0.0s 
+ => => naming to docker.io/library/todo-app                                                                                                                 0.0s 
+
+View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/hzhzacjqer3o2un00sfwd0tlz
+
+What's next:
+    View a summary of image vulnerabilities and recommendations → docker scout quickview
+PS C:\Repos\cka-tutorial\01_dockerize_project\getting-started-app> docker images
+REPOSITORY                      TAG       IMAGE ID       CREATED              SIZE
+todo-app                        latest    b63820c22103   About a minute ago   219MB
+docker/lsp                      golang    1173fc2081c1   2 days ago           208MB
+docker/labs-vscode-installer    0.0.7     fa70d62562a8   5 days ago           30.4MB
+docker/labs-ai-tools-for-devs   0.0.13    21f751c6ab33   10 days ago          13.6MB
+PS C:\Repos\cka-tutorial\01_dockerize_project\getting-started-app> docker tag todo-app:latest mohanakrishnavh/todo-app-repository:latest 
+PS C:\Repos\cka-tutorial\01_dockerize_project\getting-started-app> docker images
+REPOSITORY                            TAG       IMAGE ID       CREATED         SIZE
+todo-app                              latest    b63820c22103   6 minutes ago   219MB
+mohanakrishnavh/todo-app-repository   latest    b63820c22103   6 minutes ago   219MB
+docker/lsp                            golang    1173fc2081c1   2 days ago      208MB
+docker/labs-vscode-installer          0.0.7     fa70d62562a8   5 days ago      30.4MB
+docker/labs-ai-tools-for-devs         0.0.13    21f751c6ab33   10 days ago     13.6MB
+PS C:\Repos\cka-tutorial\01_dockerize_project\getting-started-app> docker push mohanakrishnavh/todo-app-repository:latest
+The push refers to repository [docker.io/mohanakrishnavh/todo-app-repository]
+a4113a6c1853: Pushed
+e986f63d646b: Pushed
+c5e636015028: Pushed
+e2be10e97665: Mounted from library/node
+06fd85419b65: Mounted from library/node
+f58c462fa079: Mounted from library/node
+63ca1fbb43ae: Mounted from library/node
+latest: digest: sha256:24f6f8b447d5dc6c8a4fcd551d9f2a64c000e4223e6f3adb564b10f8a909e439 size: 1787
+PS C:\Repos\cka-tutorial\01_dockerize_project\getting-started-app> docker images
+REPOSITORY                            TAG       IMAGE ID       CREATED          SIZE
+todo-app                              latest    b63820c22103   10 minutes ago   219MB
+mohanakrishnavh/todo-app-repository   latest    b63820c22103   10 minutes ago   219MB
+docker/lsp                            golang    1173fc2081c1   2 days ago       208MB
+docker/labs-vscode-installer          0.0.7     fa70d62562a8   5 days ago       30.4MB
+docker/labs-ai-tools-for-devs         0.0.13    21f751c6ab33   10 days ago      13.6MB
+PS C:\Repos\cka-tutorial\01_dockerize_project\getting-started-app> docker run   
+"docker run" requires at least 1 argument.
+See 'docker run --help'.
+
+Usage:  docker run [OPTIONS] IMAGE [COMMAND] [ARG...]
+
+Create and run a new container from an image
+PS C:\Repos\cka-tutorial\01_dockerize_project\getting-started-app> docker run -dp 3000:3000 mohanakrishnavh/todo-app-repository:latest
+6e331d6cb5641976aafe75783998275ee8b6624e5970646f494177cd0516443b
+PS C:\Repos\cka-tutorial\01_dockerize_project\getting-started-app> docker ps
+CONTAINER ID   IMAGE                                        COMMAND                  CREATED          STATUS          PORTS                    NAMES
+6e331d6cb564   mohanakrishnavh/todo-app-repository:latest   "docker-entrypoint.s…"   30 seconds ago   Up 29 seconds   0.0.0.0:3000->3000/tcp   exciting_dubinsky
+3d01c41e1001   docker/lsp:golang                            "/build/docker-langu…"   28 minutes ago   Up 28 minutes                            focused_fermi
+PS C:\Repos\cka-tutorial\01_dockerize_project\getting-started-app> docker exec -it 6e331d6cb564 sh
+/app # ls
+Dockerfile    README.md     node_modules  package.json  spec          src           yarn.lock
+/app # ls -lrt
+total 172
+-rwxr-xr-x    1 root     root        150541 Sep 29 16:37 yarn.lock
+-rwxr-xr-x    1 root     root           681 Sep 29 16:37 package.json
+-rwxr-xr-x    1 root     root           273 Sep 29 16:37 README.md
+drwxr-xr-x    5 root     root          4096 Sep 29 16:38 src
+drwxr-xr-x    4 root     root          4096 Sep 29 16:38 spec
+-rwxr-xr-x    1 root     root           358 Sep 29 16:47 Dockerfile
+drwxr-xr-x  167 root     root          4096 Sep 29 16:52 node_modules
+/app # exit
